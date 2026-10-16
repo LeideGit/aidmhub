@@ -253,10 +253,10 @@ class AIHubApp {
 
         if (countdownEl) {
             const seconds = this.acknowledgementCountdown;
-            const color = seconds <= 10 ? '#d42426' : seconds <= 20 ? '#ff9500' : '#0066cc';
+            const color = seconds <= 10 ? '#ffc600' : '#ffffff';
 
             countdownEl.innerHTML = `
-                <div style="font-size: 1.2rem; font-weight: bold; color: ${color}; padding: 0.5rem 1rem; background: rgba(0,0,0,0.05); border-radius: 4px;">
+                <div style="font-size: 1.2rem; font-weight: bold; color: ${color}; padding: 0.5rem 1rem; background: rgba(0,0,0,0.1); border-radius: 4px;">
                     ⏱️ ${seconds}s innan nästa eskalering
                 </div>
             `;
