@@ -456,7 +456,15 @@ class AIHubApp {
                 content += msg.text;
             }
 
-            content += `<div class="message-time">${this.formatTime(msg.timestamp)}</div></div>`;
+            // Add timestamp and sender name for regular messages
+            if (msg.type !== "decision" && msg.type !== "delegation" && msg.type !== "action") {
+                const senderName = sender?.name || "Unknown";
+                content += `<div class="message-meta"><small>${senderName} • ${this.formatTime(msg.timestamp)}</small></div>`;
+            } else {
+                content += `<div class="message-time">${this.formatTime(msg.timestamp)}</div>`;
+            }
+
+            content += `</div>`;
 
             div.innerHTML = content;
             this.messagesContainer.appendChild(div);

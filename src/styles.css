@@ -721,6 +721,17 @@ body {
     color: rgba(0, 0, 0, 0.5);
 }
 
+.message-meta {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.message.user .message-meta {
+    color: rgba(0, 0, 0, 0.5);
+}
+
 /* Action Event (Decision, Delegation, Action) */
 .event {
     background-color: #fffbeb;
