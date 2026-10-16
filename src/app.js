@@ -9,6 +9,8 @@ class AIHubApp {
         this.currentUserId = mockData.users[1].userId; // usr_002 = Erik Svensson
         this.alarmTriggeredAt = null;
         this.alarmTimeout = null;
+        this.acknowledgementCountdown = null;
+        this.countdownInterval = null;
         this.sounds = this.initializeSounds();
         this.init();
     }
@@ -199,6 +201,9 @@ class AIHubApp {
         // Play alarm sound
         this.playSound('alarm');
 
+        // Start 30-second acknowledgement countdown
+        this.startAcknowledgementCountdown();
+
         // Sort DM list and highlight the alarm
         this.renderDMList();
 
@@ -209,6 +214,52 @@ class AIHubApp {
 
             // Display alarm banner
             this.updateAlarmBanner();
+        }
+    }
+
+    startAcknowledgementCountdown() {
+        // 30 second countdown before next escalation
+        this.acknowledgementCountdown = 30;
+
+        // Clear any existing interval
+        if (this.countdownInterval) clearInterval(this.countdownInterval);
+
+        // Update countdown display immediately
+        this.updateCountdownDisplay();
+
+        // Update every second
+        this.countdownInterval = setInterval(() => {
+            this.acknowledgementCountdown--;
+            this.updateCountdownDisplay();
+
+            if (this.acknowledgementCountdown <= 0) {
+                clearInterval(this.countdownInterval);
+                this.acknowledgementCountdown = null;
+            }
+        }, 1000);
+    }
+
+    updateCountdownDisplay() {
+        if (this.acknowledgementCountdown === null) return;
+
+        // Find or create countdown element in alarm banner
+        let countdownEl = document.querySelector(".alarm-countdown");
+
+        if (!countdownEl && this.alarmBanner) {
+            countdownEl = document.createElement("div");
+            countdownEl.className = "alarm-countdown";
+            this.alarmBanner.appendChild(countdownEl);
+        }
+
+        if (countdownEl) {
+            const seconds = this.acknowledgementCountdown;
+            const color = seconds <= 10 ? '#d42426' : seconds <= 20 ? '#ff9500' : '#0066cc';
+
+            countdownEl.innerHTML = `
+                <div style="font-size: 1.2rem; font-weight: bold; color: ${color}; padding: 0.5rem 1rem; background: rgba(0,0,0,0.05); border-radius: 4px;">
+                    ⏱️ ${seconds}s innan nästa eskalering
+                </div>
+            `;
         }
     }
 
@@ -230,6 +281,13 @@ class AIHubApp {
     handleAcknowledge() {
         const conv = mockDataHelpers.getConversationById(this.currentConversationId);
         if (conv) {
+            // Stop countdown
+            if (this.countdownInterval) {
+                clearInterval(this.countdownInterval);
+                this.countdownInterval = null;
+            }
+            this.acknowledgementCountdown = null;
+
             // Mark alarm as acknowledged
             mockDataHelpers.addMessage(
                 this.currentConversationId,
@@ -250,7 +308,7 @@ class AIHubApp {
             this.playSound('acknowledged');
 
             // Update UI
-            this.updateAlarmBanner(); // Hide alarm banner
+            this.updateAlarmBanner(); // Hide alarm banner and countdown
             this.renderMessages();
             this.renderDMList(); // Update DM list to remove red styling
         }

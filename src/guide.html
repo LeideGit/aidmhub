@@ -428,30 +428,32 @@
             <div class="flow-step">
                 <div class="flow-step-number">1</div>
                 <div class="flow-step-content">
-                    <div class="flow-step-title">Systemet Startar</div>
+                    <div class="flow-step-title">⏰ Systemet Startar — Vänta 10 Sekunder</div>
                     <div class="flow-step-description">
-                        Du ser DM-listan med flera kollegor och botar. Systemet börjar räkna ned — 10 sekunder tills larmet.
+                        Du ser DM-listan med kollegor och botar. Systemet räknar ned — efter 10 sekunder utlöses ett kritiskt larm.
                     </div>
                 </div>
             </div>
 
-            <div class="flow-step">
+            <div class="flow-step critical">
                 <div class="flow-step-number">2</div>
                 <div class="flow-step-content">
-                    <div class="flow-step-title">⚠️ Larmet Dyker Upp</div>
+                    <div class="flow-step-title">⚠️ KRITISK ESKALERING — Larmet Dyker Upp</div>
                     <div class="flow-step-description">
-                        Efter 10 sekunder uppstår ett kritiskt larm från HPM-2400. Det visas röd högt upp i listan.
-                        Konversationen öppnas automatiskt. Du ser "⚠️ KRITISK ESKALERING" från maskinboten.
+                        Efter exakt 10 sekunder: ett kritiskt larm från HPM-2400 dyker upp röd högst upp i DM-listan.
+                        Konversationen öppnas automatiskt. Du ser "⚠️ KRITISK ESKALERING" från maskinboten med [DATA], [TOLKNING] och [REKOMMENDATION].
                     </div>
                 </div>
             </div>
 
-            <div class="flow-step">
+            <div class="flow-step critical">
                 <div class="flow-step-number">3</div>
                 <div class="flow-step-content">
-                    <div class="flow-step-title">Läs Larmet & Stödinformation</div>
+                    <div class="flow-step-title">✓ Kvittera Larmet — Nedräkning: 30 Sekunder</div>
                     <div class="flow-step-description">
-                        Boten visar: [DATA] sensorvärden, [TOLKNING] vad det betyder, [REKOMMENDATION] förslag.
+                        Klicka knappen "Kvittera" i larmbannern. <strong>En 30-sekunders nedräkning startar</strong> och visas tydligt.
+                        Om du inte delegerar eller fattar ett beslut innan tiden är slut, eskaleras larmet ännu högre i organisationen.
+                        Nedräkningen skapar urgency och visar systemets eskalerings-logik.
                     </div>
                 </div>
             </div>
@@ -459,11 +461,10 @@
             <div class="flow-step">
                 <div class="flow-step-number">4</div>
                 <div class="flow-step-content">
-                    <div class="flow-step-title">Registrera Åtgärder</div>
+                    <div class="flow-step-title">💬 Fråga Boten i Chatten</div>
                     <div class="flow-step-description">
-                        Klicka "Beslut" — välj ett ärende och skriv ditt beslut (t.ex. "Stänga av systemet").
-                        Klicka "Delegering" — skicka uppgift till en kollega.
-                        Klicka "Åtgärd" — registrera vad som faktiskt gjordes.
+                        I meddelandefältet längst ner skriver du en fråga, t.ex. "Vad är temperaturnivån nu?" eller "Vad orsakar larmet?".
+                        Boten svarar med mer detaljer: vilken sensor, vilket värde, vad som är normalt, och en rekommendation.
                     </div>
                 </div>
             </div>
@@ -471,10 +472,34 @@
             <div class="flow-step">
                 <div class="flow-step-number">5</div>
                 <div class="flow-step-content">
-                    <div class="flow-step-title">Granska Historik</div>
+                    <div class="flow-step-title">📋 Delegera till Anna</div>
                     <div class="flow-step-description">
-                        I "Ärenden"-fliken ser du hela historiken av detta larm — vem som beslutade vad, vem som delegerade,
-                        vem som utförde åtgärden, alla tidsstämplar. Allt länkat till CASE-ID.
+                        Klicka knappen "📋 Delegering". I modalen: välj ett ärende, skriv uppgiften (t.ex. "Inspektera kylsystemet"),
+                        och välj Anna Bergström som mottagare. Klicka "Delegera". Anna får omedelbar notifiering.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-step-number">6</div>
+                <div class="flow-step-content">
+                    <div class="flow-step-title">🤝 Be Lars Hjälpa Anna</div>
+                    <div class="flow-step-description">
+                        Klicka "📋 Delegering" igen. Välj samma ärende, skapa en ny delegering: "Hjälp Anna med kylsysteminspektionen",
+                        och välj Lars Nyström som mottagare. Efter ~5 sekunder får du en DM från Lars som bekräftar uppgiften.
+                        Efter ~10 sekunder rapporterar han att arbetet börjat.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-step success">
+                <div class="flow-step-number">7</div>
+                <div class="flow-step-content">
+                    <div class="flow-step-title">📂 Se Ärendehanteringen</div>
+                    <div class="flow-step-description">
+                        Klicka på fliken "📋 Ärenden" högst upp. Du ser ärendet (CASE-XXX) med all kronologisk historia:
+                        originallarmet, dina delegeringar, Annas och Lars' åtgärder, tidsstämplar — allt länkat och spårbart.
+                        Det är det kompletta audit trail av incidenten.
                     </div>
                 </div>
             </div>

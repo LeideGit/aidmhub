@@ -634,6 +634,21 @@ body {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
+.alarm-countdown {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    animation: countdown-pulse 1s infinite;
+}
+
+@keyframes countdown-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
 /* Conversation Header */
 .conversation-header {
     padding: var(--spacing-md) var(--spacing-lg);
